@@ -1,0 +1,14 @@
+image: node:14-alpine
+
+pages:
+  stage: deploy
+  script:
+    - npm install
+    - npm run build-storybook
+    - rm -rf public && mkdir -p public
+    - mv storybook-static/* public
+  artifacts:
+    paths:
+      - public
+  only:
+    - staging
